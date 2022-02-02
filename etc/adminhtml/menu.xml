@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Leon::top_level" title="Leon" module="Leon_Weather" sortOrder="9999" resource="Magento_Backend::content"/>
+		<add id="Leon_Weather::leon_weather" title="Weather" module="Leon_Weather" sortOrder="9999" resource="Magento_Backend::content" parent="Leon::top_level" action="leon_weather/weather/index"/>
+	</menu>
+</config>

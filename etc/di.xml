@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Leon\Weather\Api\WeatherRepositoryInterface" type="Leon\Weather\Model\WeatherRepository"/>
+	<preference for="Leon\Weather\Api\Data\WeatherInterface" type="Leon\Weather\Model\Weather"/>
+	<preference for="Leon\Weather\Api\Data\WeatherSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Leon\Weather\Model\ResourceModel\Weather\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">leon_weather</argument>
+			<argument name="resourceModel" xsi:type="string">Leon\Weather\Model\ResourceModel\Weather\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="leon_weather_listing_data_source" xsi:type="string">Leon\Weather\Model\ResourceModel\Weather\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+    <virtualType name="WeatherHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/weather.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="WeatherLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">leon_weather</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="object">WeatherHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Leon\Weather\Logger\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">WeatherLogger</argument>
+        </arguments>
+    </type>
+</config>

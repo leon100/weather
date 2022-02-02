@@ -1,0 +1,12 @@
+{
+    "leon_weather": {
+        "column": {
+            "weather_id": true,
+            "weather_data": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
